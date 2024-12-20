@@ -7,24 +7,25 @@ export default function CountryCard({
   population,
   region,
   capital,
+  data,
 }) {
   return (
     <Link className="country-card" to={`/${name}`} state={data}>
       <div className='flag-container'>
-        <img src={flag} alt="flag" />
+        <img src={flag} alt={name + ' Flag'} />
       </div>
       <div className="card-text">
-        <h2 className="card-title">{name}</h2>
+        <h3 className="card-title">{name}</h3>
         <p>
-          Population: 
-          {population}
+          <b>Population: </b>
+          {population.toLocaleString('en-IN')}
         </p>
         <p>
-          Region: 
+          <b>Region: </b>
           {region}
         </p>
         <p>
-          Capital:
+          <b>Capital: </b>
           {capital}
         </p>
       </div>
