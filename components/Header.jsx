@@ -3,12 +3,18 @@ export default function Header() {
 
   
   return (
-    <header>
+    <header className={`header-container ${isDark? 'dark': ''}`}>
       <div className="header-content">
         <h2 className="title">
-          <p>The Nations Database</p>
+          <a href="/">The Nations Database</a>
         </h2>
-        Mode options
+        <p className="theme-changer" onClick={() => {
+          setIsDark(!isDark)
+          localStorage.setItem('isDarkMode', !isDark)
+        }}>
+          <i className={`fa-solid fa-${isDark ? 'sun': 'moon'}` }/>
+          &nbsp;&nbsp;{isDark? 'Light': 'Dark'} Mode
+        </p>
       </div>
     </header>
   )
