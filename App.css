@@ -150,3 +150,22 @@ a {
     background-color: var(--elements-color);
     color: var(--text-color);
 }
+
+@media(max-width: 768px) {
+    .countries-container {
+        justify-content: center;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .header-content p {
+        font-size: 12px;
+    }
+
+    .search-filter-container {
+        flex-direction: column;
+    }
+    
+}
