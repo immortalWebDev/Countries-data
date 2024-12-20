@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from "react";
+import "../styles/Footer.css";
+import { useTheme } from "../hooks/useTheme";
+
 export default function Footer() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [isDark] = useTheme();
@@ -16,8 +20,10 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className='footer'>
-      Created with 💝 by Piyush
+    <footer className={`footer ${isAtBottom ? "visible" : ""}`}>
+      <span className={`${isDark ? "dark" : "light"}`}>
+        Created with 💝 by Piyush
+      </span>
     </footer>
-  )
+  );
 }
