@@ -1,4 +1,5 @@
 import { useTheme } from "../hooks/useTheme"
+import { Link } from "react-router-dom"
 
 export default function Header() {
   const [isDark, setIsDark] =  useTheme()
@@ -7,7 +8,7 @@ export default function Header() {
     <header className={`header-container ${isDark? 'dark': ''}`}>
       <div className="header-content">
         <h2 className="title">
-          <a href="/">The Nations Database</a>
+          <Link to="/">The Nations Database 🌍</Link>
         </h2>
         <p className="theme-changer" onClick={() => {
           setIsDark(!isDark)
