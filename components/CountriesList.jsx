@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import CountryCard from './CountryCard'
 import CountriesListShimmer from './CountriesListShimmer'
+import countriesDataCache from "../countriesData"
 
 export default function CountriesList({ query }) {
+
   const [countriesData, setCountriesData] = useState([])
 
   const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -10,16 +12,28 @@ export default function CountriesList({ query }) {
   useEffect(() => {
 
     const fetchCountriesData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/all`);
+        const data = await response.json();
 
-      const response = await fetch(`${BASE_URL}/all`)
-      const data = await response.json()
-      console.log(data)
-      setCountriesData(data)
-    }
+        console.log("Fetched data:", data);
+        setCountriesData(data);
+      } 
+      catch (error) 
+      {
+        console.error("Error fetching countries data:", error);
+        console.log("Used fallback cache data (use Brave Browser to solve CORS)")
+        setCountriesData(countriesDataCache);
+      }
+    };
+  
+    fetchCountriesData();
+  }, []);
+  
 
-    fetchCountriesData()
-    
-  }, [])
+
+
+
 
   if (!countriesData.length) {
     return <CountriesListShimmer />
