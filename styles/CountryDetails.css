@@ -12,16 +12,32 @@
     background-color: var(--elements-color);
 }
 
+.back-button:hover{
+    background-color: #00aeff86;
+    transition: all 0.3s ease;
+}
+
 .country-details {
     display: flex;
     align-items: center;
     gap: 64px;
-    margin-top: 64px;
+    margin-top: 60px;
 }
+
 
 .country-details img {
     width: 40%;
     border: 1px solid #ddd;
+}
+
+.country-details img:hover{
+    border-color: #3fa9da; 
+    box-shadow: 0 8px 15px rgba(0, 128, 0, 0.4); /* Subtle shadow effect */
+    transform: scale(1.01); 
+    transition: all 0.3s ease
+
+
+
 }
 
 .details-text {
@@ -51,6 +67,11 @@
     background-color: var(--elements-color);
     border-radius: 4px;
     font-size: 14px;
+}
+
+.border-countries a:hover{
+    background-color: #00aeff86;
+    transition: all 0.3s ease;
 }
 
 @media(max-width: 940px) {
