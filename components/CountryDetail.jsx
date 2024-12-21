@@ -16,7 +16,51 @@ export default function CountryDetail() {
 
   const BASE_URL = process.env.REACT_APP_BASE_URL
 
-  
+  async function updateCountryData(data) {
+    
+    setCountryData({
+      name: data.name.common || data.name,
+      nativeName: Object.values(data.name.nativeName || {})[0]?.common || "N/A",
+      population: data.population,
+      region: data.region,
+      subregion: data.subregion,
+      capital: data.capital || "N/A",
+      flag: data.flags?.svg,
+      tld: data.tld,
+      languages: Object.values(data.languages || {}).join(', '),
+      currencies: Object.values(data.currencies || {})
+        .map((currency) => currency.name)
+        .join(', '),
+      borders: [],
+    })
+
+    if (!data.borders) {
+      data.borders = []
+    }
+
+    setBorderLoading(true) 
+
+    
+    const borders = await Promise.all(
+      data.borders.map(async (border) => {
+        const response = await fetch(`${BASE_URL}/alpha/${border}`);
+        const [borderCountry] = await response.json();
+        return borderCountry.name.common;
+      })
+    );
+    
+    setTimeout(() => {
+      setCountryData((prevState) => ({ ...prevState, borders }));
+      setBorderLoading(false);
+    }, 0);
+    
+    // Promise.resolve().then(() => {
+    //   setCountryData((prevState) => ({ ...prevState, borders }));
+    //   setBorderLoading(false);
+    // });
+    
+  }
+
 
   useEffect(() => {
     const fetchCountryData = async () => {
