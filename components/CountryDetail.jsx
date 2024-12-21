@@ -10,8 +10,13 @@ export default function CountryDetail() {
   const { state } = useLocation()
   const countryName = params.country
 
+  const [countryData, setCountryData] = useState(null)
+  const [notFound, setNotFound] = useState(false)
+  const [borderLoading, setBorderLoading] = useState(true) 
+
   const BASE_URL = process.env.REACT_APP_BASE_URL
 
+  
 
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -36,6 +41,9 @@ export default function CountryDetail() {
   }, [countryName]);
   
 
+  if (notFound) {
+    return <div className="not-found">There is no such country!</div>
+  }
 
   return (
     <main className={`${isDark ? 'dark' : ''}`}>
