@@ -25,27 +25,33 @@ export default function CountriesList({ query }) {
     return <CountriesListShimmer />
   }
 
-  return (
+
+  const filteredCountries = countriesData.filter((country) =>
+    country.name.common.toLowerCase().includes(query.toLowerCase()) ||
+    country.region.toLowerCase().includes(query.toLowerCase())
+  );
+
+ return (
     <>
-      <div className="countries-container">
-        {countriesData
-          .filter((country) =>
-            country.name.common.toLowerCase().includes(query) || country.region.toLowerCase().includes(query)
-          )
-          .map((country) => {
-            return (
-              <CountryCard
-                key={country.name.common}
-                name={country.name.common}
-                flag={country.flags.svg}
-                population={country.population}
-                region={country.region}
-                capital={country.capital?.[0]}
-                data={country}
-              />
-            )
-          })}
-      </div>
+      {filteredCountries.length ? (
+        <div className="countries-container">
+          {filteredCountries.map((country) => (
+            <CountryCard
+              key={country.name.common}
+              name={country.name.common}
+              flag={country.flags.svg}
+              population={country.population}
+              region={country.region}
+              capital={country.capital?.[0]}
+              data={country}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="not-found">
+          No such country available!
+        </div>
+      )}
     </>
-  )
+  );
 }
