@@ -41,11 +41,25 @@ export default function CountryDetail() {
     setBorderLoading(true) 
 
     
+    // const borders = await Promise.all(
+    //   data.borders.map(async (border) => {
+    //     const response = await fetch(`${BASE_URL}/alpha/${border}`);
+    //     const [borderCountry] = await response.json();
+    //     return borderCountry.name.common;
+    //   })
+    // );
+
     const borders = await Promise.all(
       data.borders.map(async (border) => {
-        const response = await fetch(`${BASE_URL}/alpha/${border}`);
-        const [borderCountry] = await response.json();
-        return borderCountry.name.common;
+        try {
+          const response = await fetch(`${BASE_URL}/alpha/${border}`);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const [borderCountry] = await response.json();
+          return borderCountry.name.common;
+        } catch (error) {
+          console.error('Failed to fetch border country:', error);
+          return 'Unknown';
+        }
       })
     );
     
