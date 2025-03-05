@@ -84,8 +84,7 @@ export default function CountryDetail() {
           updateCountryData(state); 
           return;
         }
-  
-        const response = await fetch(`${BASE_URL}/name/${countryName}?fullText=true`);
+        const response = await fetch(`${BASE_URL}/name/${countryName}?fullText=true`,{ mode: 'no-cors' });
         const [data] = await response.json();
         // console.log('one country data fetched fresh:', data);
         updateCountryData(data);
