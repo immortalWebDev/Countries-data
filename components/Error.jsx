@@ -4,7 +4,7 @@ import '../styles/Error.css';
 
 export default function Error() {
   const error = useRouteError();
-  console.log(error);
+  console.log('Error page',error);
 
   return (
     <div className="error-container">

@@ -20,7 +20,7 @@ export default function CountriesList({ query }) {
       if (isCacheValid) {
         // If cached data exists, use it
         setCountriesData(JSON.parse(cachedData));
-        console.log("Loaded data from localStorage");
+        // console.log("Loaded data from localStorage");
         return;
       }
 
@@ -28,7 +28,7 @@ export default function CountriesList({ query }) {
         const response = await fetch(`${BASE_URL}/all`);
         const data = await response.json();
 
-        console.log("Fetched data:", data);
+        // console.log("Fetched data:", data);
         setCountriesData(data);
         localStorage.setItem("allNationsDataCache", JSON.stringify(data));
         localStorage.setItem("cacheTimestamp", Date.now().toString());

@@ -80,14 +80,14 @@ export default function CountryDetail() {
     const fetchCountryData = async () => {
       try {
         if (state) {
-          console.log('one country from state useLocation', state);
+          // console.log('one country from state useLocation', state);
           updateCountryData(state); 
           return;
         }
   
         const response = await fetch(`${BASE_URL}/name/${countryName}?fullText=true`);
         const [data] = await response.json();
-        console.log('one country data fetched fresh:', data);
+        // console.log('one country data fetched fresh:', data);
         updateCountryData(data);
       } catch (err) {
         console.error(err);
