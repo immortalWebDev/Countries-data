@@ -84,9 +84,13 @@ export default function CountryDetail() {
           updateCountryData(state); 
           return;
         }
-        const response = await fetch(`${BASE_URL}/name/${countryName}?fullText=true`,{ mode: 'no-cors' });
-        const [data] = await response.json();
-        // console.log('one country data fetched fresh:', data);
+        const response = await fetch(`${BASE_URL}/name/${countryName}?fullText=true`);
+        const responseData = await response.json();
+        if (!responseData || responseData.length === 0) {
+          throw new Error('No data found');
+        }
+        const [data] = responseData;
+        console.log('one country data fetched fresh:', data);
         updateCountryData(data);
       } catch (err) {
         console.error(err);
