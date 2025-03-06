@@ -22,15 +22,13 @@ export default function CountryDetail() {
       name: data.name.common || data.name,
       nativeName: Object.values(data.name.nativeName || {})[0]?.common || "N/A",
       population: data.population,
-      region: data.region,
-      subregion: data.subregion,
-      capital: data.capital || "N/A",
+      region: data.region ? data.region : "N/A",
+      subregion: data.languages ? Object.values(data.languages).join(", ") : "N/A",
+      capital:  data.capital ? data.capital[0] : "N/A",
       flag: data.flags?.svg,
       tld: data.tld,
-      languages: Object.values(data.languages || {}).join(', '),
-      currencies: Object.values(data.currencies || {})
-        .map((currency) => currency.name)
-        .join(', '),
+      languages:data.languages ? Object.values(data.languages).join(", ") : "N/A",
+      currencies:data.currencies ? Object.values(data.currencies)[0].name : "N/A",
       borders: [],
     })
 
@@ -137,7 +135,7 @@ export default function CountryDetail() {
                   <b>Sub Region: {countryData.subregion}</b>
                 </p>
                 <p>
-                  <b>Capital: {countryData.capital?.join(', ')}</b>
+                  <b>Capital: {countryData.capital}</b>
                 </p>
                 <p>
                   <b>Top Level Domain: {countryData.tld}</b>
